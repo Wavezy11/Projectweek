@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+header {
+    background-color: #333; /* Donkergrijze achtergrond */
+    padding: 10px 20px; /* Kleinere padding voor een compactere header */
+    color: white;
+    display: flex; /* Flexbox voor een betere indeling */
+    justify-content: space-between; /* Ruimte tussen logo en navigatie */
+    align-items: center; /* Centeren van de items in de header */
+}
+
+header .logo {
+    width: 80px; /* Breedte van het logo */
+}
+
+header nav {
+    margin-top: 0; /* Geen extra ruimte boven de navigatie */
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px; /* Ruimte tussen de navigatielinks */
+    font-weight: bold; /* Dikkere tekst voor een betere leesbaarheid */
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Lichte schaduw voor diepte */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50; /* Groene achtergrond voor knoppen */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold; /* Dikkere tekst voor een betere leesbaarheid */
+    transition: background-color 0.3s; /* Voor een soepele overgang bij hover */
+}
+
+button:hover {
+    background-color: #45a049; /* Donkerder groen bij hover */
+}
+
+footer {
+    background-color: #333; /* Donkergrijze achtergrond */
+    color: white;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

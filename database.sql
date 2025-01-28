@@ -2,22 +2,22 @@ DROP TABLE IF EXISTS items;
 DROP TABLE IF EXISTS categories;
 
 CREATE TABLE categories (
-    category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE items (
-    item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    category_id INTEGER,
-    expiry_day INTEGER NOT NULL,
-    expiry_month INTEGER NOT NULL,
-    expiry_year INTEGER NOT NULL,
+    category_id INT,
+    expiry_day TINYINT NOT NULL,
+    expiry_month TINYINT NOT NULL,
+    expiry_year SMALLINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     notes TEXT,
     is_active BOOLEAN DEFAULT 1,
     FOREIGN KEY (category_id) REFERENCES categories(category_id),
@@ -50,21 +50,24 @@ CREATE VIEW near_expiry_items AS
 SELECT 
     i.item_id,
     i.name,
-    c.name as category,
+    c.name AS category,
     i.expiry_day,
     i.expiry_month,
     i.expiry_year
 FROM items i
 LEFT JOIN categories c ON i.category_id = c.category_id
-WHERE date(i.expiry_year || '-' || 
-           PRINTF('%02d', i.expiry_month) || '-' || 
-           PRINTF('%02d', i.expiry_day)) <= date('now', '+7 days')
+WHERE DATE(CONCAT(i.expiry_year, '-', 
+                  LPAD(i.expiry_month, 2, '0'), '-', 
+                  LPAD(i.expiry_day, 2, '0'))) <= DATE(NOW() + INTERVAL 7 DAY)
 AND i.is_active = 1;
 
+DELIMITER $$
+
 CREATE TRIGGER update_items_timestamp 
-AFTER UPDATE ON items
+BEFORE UPDATE ON items
+FOR EACH ROW
 BEGIN
-    UPDATE items 
-    SET updated_at = CURRENT_TIMESTAMP 
-    WHERE item_id = NEW.item_id;
-END;
+    SET NEW.updated_at = CURRENT_TIMESTAMP;
+END$$
+
+DELIMITER ;

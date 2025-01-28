@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwapFood - Producten</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo zwart wit.png" alt="SwapFood Logo" class="logo">
+        <h1>Voeg Producten Toe</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="producten.html">Producten</a>
+            <a href="map.html">Map</a>
+        </nav>
+    </header>
+    <main>
+        <section class="container">
+            <h2>Product Toevoegen</h2>
+            <form action="verwerk_producten.php" method="POST">
+                <input type="text" name="product" class="input-field" placeholder="Productnaam" required>
+                <input type="date" name="expiry_date" class="input-field" required>
+                <input type="email" name="email" class="input-field" placeholder="Emailadres" required>
+                <button type="submit">Product Toevoegen</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 SwapFood</p>
+    </footer>
+</body>
+</html>
